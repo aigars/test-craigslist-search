@@ -1,24 +1,25 @@
 Given("we navigate to the craigslist housing page") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @HousingPage = HousingPage.new(@driver)
+  @HousingPage.navigate
 end
 
 When("we access sorting dropdown") do
-  pending # Write code here that turns the phrase above into concrete actions
+  @HousingPage.clickSearchOrder
 end
 
 Then("the dropdown should contain following entries:") do |table|
   # table is a Cucumber::MultilineArgument::DataTable
-  pending # Write code here that turns the phrase above into concrete actions
+  sleep 5
 end
 
 When("we search for {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  @HousingPage.search(string)
 end
 
-When("we sort results by price {order}") do |order|
-  pending # Write code here that turns the phrase above into concrete actions
+When("we sort results by price {string}") do |string|
+  @HousingPage.sortSearchResults(string)
 end
 
-Then("the results should be sorted by price {order}") do |order|
-  pending # Write code here that turns the phrase above into concrete actions
+Then("the results should be sorted by price {string}") do |string|
+  sleep 5
 end

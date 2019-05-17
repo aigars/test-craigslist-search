@@ -24,10 +24,10 @@ Scenario: After search more sorting possibilities are available
 
 Scenario Outline: Sorting by price
   Given we navigate to the craigslist housing page
-  When we sort results by price "<order>"
+  When we sort results by price "<text>"
   Then the results should be sorted by price "<order>"
 
   Examples:
-    | order      |
-    | ascending  |
-    | descending |
+    | text     | order |
+    | price ↑  | asc   |
+    | price ↓  | desc  |
