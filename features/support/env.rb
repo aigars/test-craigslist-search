@@ -8,7 +8,8 @@ Before do
 end
 
 After do |scenario|
-  Cucumber.wants_to_quit = true if scenario.failed? #exit cucumber i one of tests failed
+  #exit cucumber if one of tests failed
+  Cucumber.wants_to_quit = true if scenario.failed?
 end
 
 at_exit do

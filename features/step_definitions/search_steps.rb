@@ -8,8 +8,13 @@ When("we access sorting dropdown") do
 end
 
 Then("the dropdown should contain following entries:") do |table|
-  # table is a Cucumber::MultilineArgument::DataTable
-  sleep 5
+  data = table.hashes
+  elements = @HousingPage.getSearchOrderDropdownList
+  #go through dropdown elements and compare them with data from table
+  elements.each_with_index do |element, i|
+    expect(element.text).to eq(data[i]['text'])
+    expect(element.attribute('href')). to include(data[i]['href'])
+  end
 end
 
 When("we search for {string}") do |string|

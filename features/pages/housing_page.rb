@@ -28,6 +28,10 @@ class HousingPage
     driver.find_element(SEARCH_ORDER_DROPDOWN).find_element(:xpath, './/a[contains(., "' + order + '")]').click
   end
 
+  def getSearchOrderDropdownList
+    return driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
+  end
+
   def search(query)
     driver.find_element(SEARCH_QUERY).send_keys(query)
     driver.find_element(SEARCH_BTN).click
