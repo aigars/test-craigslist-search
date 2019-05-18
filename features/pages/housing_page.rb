@@ -2,12 +2,10 @@ class HousingPage
 
   URL = "https://helsinki.craigslist.org/d/housing/search/hhh?lang=en&cc=gb"
 
-  SEARCH_FORM           = { id: 'searchform' }
   SEARCH_QUERY          = { id: 'query' }
   SEARCH_BTN            = { class: 'searchbtn' }
   SEARCH_ORDER_DROPDOWN = { class: 'search-sort' }
   SEARCH_RESULTS        = { id: 'sortable-results' }
-  SEARCH_RESULT_ROWS    = { class: 'rows'}
   SEARCH_RESULT_PRICE   = { class: 'result-price'}
 
   attr_accessor :driver
@@ -39,7 +37,6 @@ class HousingPage
     elements = driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
     #add all prices to array until banner is reached
     elements.each do |element|
-      #break if element.attribute('class').include? 'ban'
       price = element.text
       prices.push(price.tr(currency_string, '').to_i) if price.include? currency_string
     end

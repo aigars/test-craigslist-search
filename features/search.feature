@@ -25,7 +25,7 @@ Scenario: After search more sorting possibilities are available
 Scenario Outline: Sorting by price
   Given we navigate to the craigslist housing page
   When we sort results by "<order>"
-  Then the results should be sorted by price "<order>"
+  Then the results should be sorted by price "<order>" in "€"
 
   Examples:
     | order   |

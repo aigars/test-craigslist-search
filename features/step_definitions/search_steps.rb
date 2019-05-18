@@ -25,8 +25,8 @@ When("we sort results by {string}") do |string|
   @HousingPage.sort_search_results(string)
 end
 
-Then("the results should be sorted by price {string}") do |string|
-  prices = @HousingPage.get_search_result_prices('€')
+Then("the results should be sorted by price {string} in {string}") do |string, string2|
+  prices = @HousingPage.get_search_result_prices(string2)
   #compare prices we got with prices we sorted
   expect(prices).to eq(prices.sort) if string == 'price ↑'
   expect(prices).to eq(prices.sort.reverse) if string == 'price ↓'
