@@ -21,29 +21,28 @@ class HousingPage
     driver.get URL
   end
 
-  def clickSearchOrder
+  def click_search_order
     driver.find_element(SEARCH_ORDER_DROPDOWN).click
   end
 
-  def sortSearchResults(order)
-    clickSearchOrder
+  def sort_search_results(order)
+    click_search_order
     driver.find_element(SEARCH_ORDER_DROPDOWN).find_element(:xpath, './/a[contains(., "' + order + '")]').click
   end
 
-  def getSearchOrderDropdownList
+  def get_search_order_dropdown_list
     return driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
   end
 
-  def getSearchResultPrices
-    elements = driver.find_element(SEARCH_RESULTS).find_element(SEARCH_RESULT_ROWS).find_elements(:xpath, './*')
+  def get_search_result_prices(currency_string)
     prices = []
+    elements = driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
     #add all prices to array until banner is reached
     elements.each do |element|
-      break if element.attribute('class').include? 'ban'
-      price = element.find_element(SEARCH_RESULT_PRICE).text.tr('€', '').to_i
-      prices.push(price)
+      #break if element.attribute('class').include? 'ban'
+      price = element.text
+      prices.push(price.tr(currency_string, '').to_i) if price.include? currency_string
     end
-
     return prices
   end
 
