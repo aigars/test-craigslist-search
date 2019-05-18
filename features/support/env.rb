@@ -1,6 +1,5 @@
 require 'selenium-webdriver'
 require 'rspec'
-require 'time'
 
 driver = Selenium::WebDriver.for :chrome
 
