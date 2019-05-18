@@ -7,6 +7,8 @@ class HousingPage
   SEARCH_BTN            = { class: 'searchbtn' }
   SEARCH_ORDER_DROPDOWN = { class: 'search-sort' }
   SEARCH_RESULTS        = { id: 'sortable-results' }
+  SEARCH_RESULT_ROWS    = { class: 'rows'}
+  SEARCH_RESULT_PRICE   = { class: 'result-price'}
 
   attr_accessor :driver
 
@@ -30,6 +32,19 @@ class HousingPage
 
   def getSearchOrderDropdownList
     return driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
+  end
+
+  def getSearchResultPrices
+    elements = driver.find_element(SEARCH_RESULTS).find_element(SEARCH_RESULT_ROWS).find_elements(:xpath, './*')
+    prices = []
+    #add all prices to array until banner is reached
+    elements.each do |element|
+      break if element.attribute('class').include? 'ban'
+      price = element.find_element(SEARCH_RESULT_PRICE).text.tr('€', '').to_i
+      prices.push(price)
+    end
+
+    return prices
   end
 
   def search(query)

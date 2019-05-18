@@ -21,10 +21,13 @@ When("we search for {string}") do |string|
   @HousingPage.search(string)
 end
 
-When("we sort results by price {string}") do |string|
+When("we sort results by {string}") do |string|
   @HousingPage.sortSearchResults(string)
 end
 
 Then("the results should be sorted by price {string}") do |string|
-  sleep 5
+  prices = @HousingPage.getSearchResultPrices
+  #compare prices we got with prices we sorted
+  expect(prices).to eq(prices.sort) if string == 'price ↑'
+  expect(prices).to eq(prices.sort.reverse) if string == 'price ↓'
 end
