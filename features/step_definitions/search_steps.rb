@@ -17,17 +17,18 @@ Then("the dropdown should contain following entries:") do |table|
   end
 end
 
-When("we search for {string}") do |string|
-  @HousingPage.search(string)
+When("we search for {string}") do |query|
+  @HousingPage.search(query)
 end
 
-When("we sort results by {string}") do |string|
-  @HousingPage.sort_search_results(string)
+When("we sort results by {string}") do |order|
+  @HousingPage.sort_search_results(order)
 end
 
-Then("the results should be sorted by price {string} in {string}") do |string, string2|
-  prices = @HousingPage.get_search_result_prices(string2)
+Then("the results should be sorted by price {string} in {string}") do |order, currency|
+  prices = @HousingPage.get_search_result_prices(currency)
   #compare prices we got with prices we sorted
-  expect(prices).to eq(prices.sort) if string == 'price ↑'
-  expect(prices).to eq(prices.sort.reverse) if string == 'price ↓'
+  expect(prices).to eq(prices.sort) if order == 'price ↑'
+  expect(prices).to eq(prices.sort.reverse) if order == 'price ↓'
 end
+  
