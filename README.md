@@ -10,6 +10,8 @@
 
 ```gem install bundler```
 
+[ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
+
 ### Installing
 
 Download source
