@@ -35,7 +35,7 @@ class HousingPage
   def get_search_result_prices(currency_string)
     prices = []
     elements = driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
-    #add all prices to array until banner is reached
+    #add all prices that have currency string to array
     elements.each do |element|
       price = element.text
       prices.push(price.tr(currency_string, '').to_i) if price.include? currency_string
