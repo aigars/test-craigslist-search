@@ -10,6 +10,8 @@ end
 Then("the dropdown should contain following entries:") do |table|
   data = table.hashes
   elements = @HousingPage.get_search_order_dropdown_list
+  #check that no entries are missing
+  expect(elements.length).to eq(data.length)
   #go through dropdown elements and compare them with data from table
   elements.each_with_index do |element, i|
     expect(element.text).to eq(data[i]['text'])
@@ -31,4 +33,3 @@ Then("the results should be sorted by price {string} in {string}") do |order, cu
   expect(prices).to eq(prices.sort) if order == 'price ↑'
   expect(prices).to eq(prices.sort.reverse) if order == 'price ↓'
 end
-  
