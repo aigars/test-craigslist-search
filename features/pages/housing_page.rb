@@ -8,33 +8,31 @@ class HousingPage
   SEARCH_RESULTS        = { id: 'sortable-results' }
   SEARCH_RESULT_PRICE   = { class: 'result-price'}
 
-  attr_accessor :driver
-
   def initialize(driver)
     @driver = driver
     navigate
   end
 
   def navigate
-    driver.get URL
+    @driver.get URL
   end
 
   def click_search_order
-    driver.find_element(SEARCH_ORDER_DROPDOWN).click
+    @driver.find_element(SEARCH_ORDER_DROPDOWN).click
   end
 
   def sort_search_results(order)
     click_search_order
-    driver.find_element(SEARCH_ORDER_DROPDOWN).find_element(:xpath, './/a[contains(., "' + order + '")]').click
+    @driver.find_element(SEARCH_ORDER_DROPDOWN).find_element(:xpath, './/a[contains(., "' + order + '")]').click
   end
 
   def get_search_order_dropdown_list
-    return driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
+    return @driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
   end
 
   def get_search_result_prices(currency_string)
     prices = []
-    elements = driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
+    elements = @driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
     #add all prices that have currency string to array
     elements.each do |element|
       price = element.text
@@ -44,7 +42,7 @@ class HousingPage
   end
 
   def search(query)
-    driver.find_element(SEARCH_QUERY).send_keys(query)
-    driver.find_element(SEARCH_BTN).click
+    @driver.find_element(SEARCH_QUERY).send_keys(query)
+    @driver.find_element(SEARCH_BTN).click
   end
 end
