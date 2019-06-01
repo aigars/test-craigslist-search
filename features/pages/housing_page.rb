@@ -27,7 +27,7 @@ class HousingPage
   end
 
   def get_search_order_dropdown_list
-    return @driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
+    @driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
   end
 
   def get_search_result_prices(currency_string)
