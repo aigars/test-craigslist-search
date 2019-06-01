@@ -31,14 +31,8 @@ class HousingPage
   end
 
   def get_search_result_prices(currency_string)
-    prices = []
     elements = @driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
-    #add all prices that have currency string to array
-    elements.each do |element|
-      price = element.text
-      prices.push(price.tr(currency_string, '').to_i) if price.include? currency_string
-    end
-    return prices
+    elements.select { |element| element.text.include? currency_string }.map { |element| element.text.tr(currency_string, '').to_i }
   end
 
   def search(query)
