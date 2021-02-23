@@ -2,44 +2,37 @@
 
 ### Prerequisites
 
-[Git](https://git-scm.com/)
-
-[Ruby](https://www.ruby-lang.org/en/downloads/)
-
-[Bundler](https://bundler.io)
-
-```gem install bundler```
-
-[ChromeDriver](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
+[Docker](https://www.docker.com/products/docker-desktop)
 
 ### Installing
 
 Download source
+
 ```
 git clone https://github.com/aigars/test-craigslist-search.git
 ```
 
-Install dependencies in project folder
+Build docker container for tests
 
 ```
-bundle install
+docker build -t ruby-cucumber .
 ```
 
 ### Running the tests
 
-Run tests in project folder
+Run tests by starting docker container from project folder
 
 ```
-cucumber
+docker run --rm -iv${PWD}:/output ruby-cucumber
 ```
+
+* This will mount project folder and allow cucumber to save results file outside of container
+* Tests will be run in headless mode
 
 ### Viewing results
 
-After test run is finished, open results in project folder
+After test run is finished, open results from project folder
 
 ```
 report.html
 ```
-
-* Test run will stop when one of tests fail
-* If test is failed, screenshot will be added to test report
