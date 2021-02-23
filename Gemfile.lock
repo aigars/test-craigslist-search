@@ -45,6 +45,7 @@ GEM
       rubyzip (~> 1.2, >= 1.2.2)
 
 PLATFORMS
+  universal-darwin-19
   x64-mingw32
 
 DEPENDENCIES
@@ -53,4 +54,4 @@ DEPENDENCIES
   selenium-webdriver
 
 BUNDLED WITH
-   2.0.1
+   2.2.11

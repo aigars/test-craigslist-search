@@ -1,12 +1,7 @@
 class HousingPage
+  #only page layout/elements should be described here
 
   URL = "https://helsinki.craigslist.org/d/housing/search/hhh?lang=en&cc=gb"
-
-  SEARCH_QUERY          = { id: 'query' }
-  SEARCH_BTN            = { class: 'searchbtn' }
-  SEARCH_ORDER_DROPDOWN = { class: 'search-sort' }
-  SEARCH_RESULTS        = { id: 'sortable-results' }
-  SEARCH_RESULT_PRICE   = { class: 'result-price'}
 
   def initialize(driver)
     @driver = driver
@@ -17,26 +12,31 @@ class HousingPage
     @driver.get URL
   end
 
-  def click_search_order
-    @driver.find_element(SEARCH_ORDER_DROPDOWN).click
+  def search_order_dropdown
+    @driver.find_element(:class, 'search-sort')
   end
 
-  def sort_search_results(order)
-    click_search_order
-    @driver.find_element(SEARCH_ORDER_DROPDOWN).find_element(:xpath, './/a[contains(., "' + order + '")]').click
+  def search_order_list
+    search_order_dropdown.find_elements(:xpath, './/a')
   end
 
-  def get_search_order_dropdown_list
-    @driver.find_element(SEARCH_ORDER_DROPDOWN).find_elements(:xpath, './/a')
+  def search_order_item(order)
+    search_order_dropdown.find_element(:xpath, './/a[contains(., "' + order + '")]')
   end
 
-  def get_search_result_prices(currency_string)
-    elements = @driver.find_element(SEARCH_RESULTS).find_elements(SEARCH_RESULT_PRICE)
-    elements.select { |element| element.text.include? currency_string }.map { |element| element.text.tr(currency_string, '').to_i }
+  def search_results
+    @driver.find_element(:id, 'sortable-results')
   end
 
-  def search(query)
-    @driver.find_element(SEARCH_QUERY).send_keys(query)
-    @driver.find_element(SEARCH_BTN).click
+  def search_result_prices(currency)
+    search_results.find_elements(:class, 'result-price').select { |element| element.text.include? currency }.map { |element| element.text.tr(currency, '').to_i }
+  end
+
+  def search_input
+    @driver.find_element(:id, 'query')
+  end
+
+  def search_btn
+    @driver.find_element(:class, 'searchbtn')
   end
 end
