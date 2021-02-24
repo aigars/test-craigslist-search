@@ -25,7 +25,7 @@ docker build -t ruby-cucumber .
 Run tests by starting docker container from project folder
 
 ```
-docker run --rm -iv${PWD}:/output ruby-cucumber
+docker run --rm -v${PWD}:/output ruby-cucumber
 ```
 
 * This will mount project folder and allow cucumber to save results file outside of container
