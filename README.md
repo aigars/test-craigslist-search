@@ -2,6 +2,8 @@
 
 ### Prerequisites
 
+[Git](https://git-scm.com/)
+
 [Docker](https://www.docker.com/products/docker-desktop)
 
 ### Installing
