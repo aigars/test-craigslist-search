@@ -19,11 +19,8 @@ RUN mkdir $TESTS_DIR
 WORKDIR $TESTS_DIR
 ADD . .
 
-#TODO: add correct bundle dirs to PATH
-#RUN gem install bundler
-#RUN bundle install
-RUN gem install selenium-webdriver
-RUN gem install cucumber
-RUN gem install rspec
+#install project dependencies
+RUN gem install bundler
+RUN bundle install
 
-CMD ["cucumber", "--format", "pretty", "--format", "html", "--out", "/output/report.html"]
+CMD ["bundle", "exec", "cucumber", "--format", "pretty", "--format", "html", "--out", "/output/report.html"]
